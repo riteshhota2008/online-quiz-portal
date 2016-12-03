@@ -36,7 +36,6 @@ function insertAns()
 
 ?>
 
-
 <html lang="en">
 <head>
     <title>Quiz Instructions</title>
@@ -52,6 +51,12 @@ function insertAns()
         h1, h2, h3, h4, h5, h6, p, a, li, ul, label, input, span {
             font-family: 'Source Sans Pro', sans-serif;
             font-weight: 400;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .footers {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -85,47 +90,51 @@ function insertAns()
 
     <?php require("header.php"); ?>
 
-    <div class="col-md-offset-2 col-md-8 col-md-offset-2 alert alert-info">
-        <h2 class="text-center">PHP Quiz</h2>
-        <form role="form" class="form-horizontal" id="quizForm" method="post">
-            <div class="form-group">
-                <label for="question" class="control-label col-sm-1" id="sNo"></label>
-                <div class="col-sm-11"><p class="form-control-static" id="question"></p></div>
-            </div>
+    <div class="container">
+        <div class="col-md-offset-2 col-md-8 col-md-offset-2 alert alert-info">
+            <h2 class="text-center">Quiz</h2>
+            <form role="form" class="form-horizontal" id="quizForm" method="post">
+                <div class="form-group">
+                    <label for="question" class="control-label col-sm-1" id="sNo"></label>
+                    <div class="col-sm-11"><p class="form-control-static" id="question"></p></div>
+                </div>
 
-            <label class="radio">
-                <div class="col-sm-2 text-right"><input type="radio" required="required" name="optans" id="opt1"/></div>
-                <div class="col-sm-10" id="option1"></div>
-            </label>
-            <label class="radio">
-                <div class="col-sm-2 text-right"><input type="radio" name="optans" id="opt2"/></div>
-                <div class="col-sm-10" id="option2"></div>
-            </label>
-            <label class="radio">
-                <div class="col-sm-2 text-right"><input type="radio" name="optans" id="opt3"/></div>
-                <div class="col-sm-10" id="option3"></div>
-            </label>
-            <label class="radio">
-                <div class="col-sm-2 text-right"><input type="radio" name="optans" id="opt4"/></div>
-                <div class="col-sm-10" id="option4"></div>
-            </label>
-            <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-                <button type="submit" role="button" class="btn btn-info btn-lg btn-block" name="nextBtn"> Next </button>
-            </div>
-            <div class="text-error" id="errorMsg"></div>
-        </form>
+                <label class="radio">
+                    <div class="col-sm-2 text-right"><input type="radio" required="required" name="optans" id="opt1"/>
+                    </div>
+                    <div class="col-sm-10" id="option1"></div>
+                </label>
+                <label class="radio">
+                    <div class="col-sm-2 text-right"><input type="radio" name="optans" id="opt2"/></div>
+                    <div class="col-sm-10" id="option2"></div>
+                </label>
+                <label class="radio">
+                    <div class="col-sm-2 text-right"><input type="radio" name="optans" id="opt3"/></div>
+                    <div class="col-sm-10" id="option3"></div>
+                </label>
+                <label class="radio">
+                    <div class="col-sm-2 text-right"><input type="radio" name="optans" id="opt4"/></div>
+                    <div class="col-sm-10" id="option4"></div>
+                </label><br><br>
+                <div class="col-md-offset-4 col-md-4 col-md-offset-4">
+                    <button type="submit" role="button" class="btn btn-info btn-lg btn-block" name="nextBtn"> Next
+                    </button>
+                </div>
+                <div class="text-error" id="errorMsg"></div>
+            </form>
 
-    </div>
-    <div class="clearfix"></div>
-    <div class="col-md-offset-2 col-md-8 col-md-offset-2">
-        <h4 class="pull-left">Total 5 Questions </h4>
-        <h4 class="pull-right">
-            Time left - <span id="timer">
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+            <h4 class="pull-left">Total 5 Questions </h4>
+            <h4 class="pull-right">
+                Time left - <span id="timer">
                     <script type="text/javascript">
                         countDown();
                     </script>
                 </span>
-        </h4>
+            </h4>
+        </div>
     </div>
     <div class="push"></div>
 </div>

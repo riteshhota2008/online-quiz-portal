@@ -16,36 +16,43 @@ require 'config.php';
             font-family: 'Source Sans Pro', sans-serif;
             font-weight: 400;
         }
-    </style>
 
+        @media only screen and (max-width: 768px) {
+            .footers {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
 
     <?php require("header.php"); ?>
-
-    <div class="col-md-offset-2 col-md-8 col-md-offset-2 alert alert-info">
-        <h3 class="text-center">Welcome to the Online Quiz Portal</h3><br/>
-        <ul class="instructions">
-            <li>Here you can take up quiz on the subjects</li>
-            <ol>
-                <li>HTML5</li>
-                <LI>CSS</LI>
-                <li>PHP</li>
-                <li>Javascript</li>
-                <li>jQuery</li>
-                <li>Bootstrap</li>
-                <li>AJAX</li>
-            </ol>
-            <li>You can add new questions under "Add question" menu</li>
-            <li>Result history can be viewed under "Results" menu</li>
-            <li>If you wish you change your profile settings, go to "My Profile" menu</li>
-        </ul>
-        <br/>
-        <div class="col-md-offset-3 col-md-6 col-md-offset-3">
-            <a href="startQuiz.php" role="button" class="btn btn-success btn-lg btn-block"><strong>Are you ready to take
-                    up
-                    the quiz?</strong></a>
+    <div class="container">
+        <div class="col-md-offset-2 col-md-8 col-md-offset-2 alert alert-info">
+            <h3 class="text-center">Welcome to the Online Quiz Portal</h3><br/>
+            <ul class="instructions">
+                <li>Here you can take up quiz on the subjects</li>
+                <ol>
+                    <li>HTML5</li>
+                    <LI>CSS</LI>
+                    <li>PHP</li>
+                    <li>Javascript</li>
+                    <li>jQuery</li>
+                    <li>Bootstrap</li>
+                    <li>AJAX</li>
+                </ol>
+                <li>You can add new questions under "Add question" menu</li>
+                <li>Result history can be viewed under "Results" menu</li>
+                <li>If you wish you change your profile settings, go to "My Profile" menu</li>
+            </ul>
+            <br/>
+            <div class="col-md-offset-3 col-md-6 col-md-offset-3">
+                <a href="startQuiz.php" role="button" class="btn btn-success btn-lg btn-block"><strong>Are you ready to
+                        take
+                        up
+                        the quiz?</strong></a>
+            </div>
         </div>
     </div>
     <div class="push"></div>

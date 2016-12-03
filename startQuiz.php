@@ -39,6 +39,12 @@ if (isset($_POST['startQuizBtn'])) {
             font-family: 'Source Sans Pro', sans-serif;
             font-weight: 400;
         }
+
+        @media only screen and (max-width: 768px) {
+            .footers {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
