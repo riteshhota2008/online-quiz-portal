@@ -80,11 +80,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="css/custom.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <style>
+        h1, h2, h3, h4, h5, h6, p, a, li, ul, label, input, span {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 400;
+        }
+
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+    </style>
 
 </head>
 <body>
-<h2 class="text-center">PHP Quiz</h2>
-<div class="container">
+<div class="container" style="margin-top: 10px">
+<h2 class="text-center">Online Quiz Portal</h2><br>
     <div class="row">
         <div class="col-xs-12 col-sm-offset-4 col-sm-4 col-sm-offset-4">
             <div class="panel panel-default">
@@ -137,6 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="text-error text-center"><h3><?php echo $message ?></h3></div>
     </div>
 </div>
+
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted" style="color: #ffffff;">Copyright &copy; <a href="http://riteshhota2008.github.io" style="color: gold">Ritesh Hota</a>. All Rights Reserved.</p>
+    </div>
+</footer>
 
 
 </body>

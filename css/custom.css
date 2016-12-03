@@ -16,15 +16,15 @@ html, body {
     font-size: 5rem;
 }
 
-/*.push,
-.footer {
+*.push,
+.footers {
     height: 100px;
 }
 
-.footer {
+.footers {
     background-color: darkslategray;
     color: white;
-}*/
+}
 
 .instructions {
     font-size: 15px;

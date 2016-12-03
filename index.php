@@ -60,11 +60,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             position: relative;
             min-height: 100%;
         }
-
-        /*body {
-            /* Margin bottom by footer height */
-        /* margin-bottom: 60px;
-     }*/
         .footer {
             position: absolute;
             bottom: 0;
@@ -78,9 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
     <title>Online Quiz Portal</title>
 </head>
-<body><br><br>
-
-<div class="container">
+<body>
+<div class="container" style="margin-top: 10px">
     <h1 class="text-center">Online Quiz Portal</h1>
     <div class="page-header"></div>
     <div class="row">
