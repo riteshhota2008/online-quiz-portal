@@ -1,6 +1,5 @@
-# OnlineExam
+# Online Quiz Portal
 # Preview demo here "http://riteshhota.16mb.com"
-Online Quiz Portal for web technologies
 
 Key features of this build
 
@@ -17,6 +16,8 @@ Key features of this build
 (6) Logout system
 
 (7) User can add new subject and new questions
+
+(8) Forgot Password Recovery
 
 
 Technologies involved in this build
