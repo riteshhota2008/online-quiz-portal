@@ -1,8 +1,7 @@
-# OnlineExam
+# Online Quiz Portal
 # Preview demo here "http://riteshhota.16mb.com"
-Online Quiz Portal for web technologies
 
-Key features of this build
+# Key features of this build
 
 (1) Login system secured by password
 
@@ -18,8 +17,12 @@ Key features of this build
 
 (7) User can add new subject and new questions
 
+(8) Forget password recovery
 
-Technologies involved in this build
+(9) Recaptcha during registration to protect website from spam and abuse
+
+
+# Technologies involved in this build
 
 (1) HTML
 
@@ -34,4 +37,12 @@ Technologies involved in this build
 (6) jQuery
 
 (7) JavaScript
+
+# API's Used
+
+(1) Google ReCaptcha for registration anti spamming
+
+(2) SMTP2GO for smtp password mail recovery
+
+
 

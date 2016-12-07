@@ -2,74 +2,94 @@
 session_start();
 require_once 'validator.php';
 
-$name = $pass = $emailID = $cpass = $message = '';
-$nameErr = $emailErr = $passErr = $cpassErr = '';
-$error = 0;
+$siteKey = '';//Add your Recaptcha Site Key
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST"):
 
-    $validObj = new validator();
-    //validate name
-    $name = $validObj->sanitize((isset($_POST["name"])) ? $_POST["name"] : " ");
-    if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
-        $nameErr = "Only letters and white space allowed";
-        $error = 1;
-    }
+    if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])):
+        //your site secret key
+        $secret = '';//Add your Recaptcha Secret Key
+        //get verify response data
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $_POST['g-recaptcha-response']);
+        $responseData = json_decode($verifyResponse);
+        if ($responseData->success):
 
-    //validate email ID
-    $emailID = $validObj->sanitize((isset($_POST["email"])) ? $_POST["email"] : "");
-    if (!filter_var($emailID, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email ID format";
-        $error = 1;
-    }
+            $name = $pass = $emailID = $cpass = $message = '';
+            $nameErr = $emailErr = $passErr = $cpassErr = '';
+            $error = 0;
 
-    //validate password
-    $pass = $validObj->sanitize((isset($_POST["pass"])) ? $_POST["pass"] : "");
-    if (strlen($pass) < 7) {
-        $passErr = "Password must be atleast 6 characters";
-        $error = 1;
-    }
-
-    //validate confirm password
-    $cpass = $validObj->sanitize((isset($_POST["conpass"])) ? $_POST["conpass"] : "");
-    if (strcmp($pass, $cpass) !== 0) {
-        $cpassErr = "Password and Confirm password do not match";
-        $error = 1;
-    }
-
-    if ($error == 0) {
-        require("config.php");
-        $hashpass = hash("sha512", $pass);
-        $sql = "INSERT INTO a1_users (name,emailID,hashpass) VALUES('" . $name . "','" . $emailID . "','" . $hashpass . "')";
-        $result = mysqli_query($dbConn, $sql);
-
-        if ($result) {
-            //Get the user id
-            $sql = "SELECT LAST_INSERT_ID() as id";
-            $result = mysqli_query($dbConn, $sql);
-            $row = mysqli_fetch_row($result);
-            $_SESSION['user_id'] = $row[0];
-
-            //set time to expire the session if there is no action for a predefined time
-            $sessionID = mysqli_real_escape_string($dbConn, session_id());
-            $expires = time() + 60 * 30; //Session expires after 30 minutes
-            $sql = "INSERT INTO a1_active_users (user_id,session_id,expires) VALUES (" . (int)$_SESSION['user_id'] . ",'" . $sessionID . "'," . $expires . " )";
-            $result = mysqli_query($dbConn, $sql);
-
-            if ($result) {
-                header("Location: home.php");
-            } else {
-                $message = "Registraion error.  Report to test@gmail.com<br />.Error: " . mysqli_error($dbConn);
+            $validObj = new validator();
+            //validate name
+            $name = $validObj->sanitize((isset($_POST["name"])) ? $_POST["name"] : " ");
+            if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+                $nameErr = "Only letters and white space allowed";
+                $error = 1;
             }
 
-        } else if (mysqli_errno($dbConn) == 1062) {
-            $message = "Registration was unsuccessful. " . $emailID . " is already a registered user.  ";
-        } else {
-            $message = "Registration was unsuccessful.  Report to test@gmail.com <br /> Error: " . mysqli_error($dbConn) . "<br /> Error No: " . mysqli_errno($dbConn);
-        }
-    }
-}
+            //validate email ID
+            $emailID = $validObj->sanitize((isset($_POST["email"])) ? $_POST["email"] : "");
+            if (!filter_var($emailID, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Invalid email ID format";
+                $error = 1;
+            }
 
+            //validate password
+            $pass = $validObj->sanitize((isset($_POST["pass"])) ? $_POST["pass"] : "");
+            if (strlen($pass) < 7) {
+                $passErr = "Password must be atleast 6 characters";
+                $error = 1;
+            }
+
+            //validate confirm password
+            $cpass = $validObj->sanitize((isset($_POST["conpass"])) ? $_POST["conpass"] : "");
+            if (strcmp($pass, $cpass) !== 0) {
+                $cpassErr = "Password and Confirm password do not match";
+                $error = 1;
+            }
+
+            //SHA-512  algorithm to convert password into 256 bit
+            if ($error == 0) {
+                require("config.php");
+                $hashpass = hash("sha512", $pass);
+                $sql = "INSERT INTO a1_users (name,emailID,hashpass) VALUES('" . $name . "','" . $emailID . "','" . $hashpass . "')";
+                $result = mysqli_query($dbConn, $sql);
+
+                if ($result) {
+                    //Get the user id
+                    $sql = "SELECT LAST_INSERT_ID() as id";
+                    $result = mysqli_query($dbConn, $sql);
+                    $row = mysqli_fetch_row($result);
+                    $_SESSION['user_id'] = $row[0];
+
+                    //set time to expire the session if there is no action for a predefined time
+                    $sessionID = mysqli_real_escape_string($dbConn, session_id());
+                    $expires = time() + 60 * 30; //Session expires after 30 minutes
+                    $sql = "INSERT INTO a1_active_users (user_id,session_id,expires) VALUES (" . (int)$_SESSION['user_id'] . ",'" . $sessionID . "'," . $expires . " )";
+                    $result = mysqli_query($dbConn, $sql);
+
+                    if ($result) {
+                        header("Location: home.php");
+                    } else {
+                        $message = "Registration error.  Report to test@gmail.com<br />.Error: " . mysqli_error($dbConn);
+                    }
+
+                } else if (mysqli_errno($dbConn) == 1062) {
+                    $message = "Registration was unsuccessful. " . $emailID . " is already a registered user.  ";
+                } else {
+                    $message = "Registration was unsuccessful.  Report to test@gmail.com <br /> Error: " . mysqli_error($dbConn) . "<br /> Error No: " . mysqli_errno($dbConn);
+                }
+            }
+            $succMsg = 'Your contact request have submitted successfully.';
+        else:
+            $errMsg = 'Robot verification failed, please try again.';
+        endif;
+    else:
+        $errMsg = 'Please click on the reCAPTCHA box.';
+    endif;
+else:
+    $errMsg = '';
+    $succMsg = '';
+endif;
 ?>
 <html lang="en">
 <head>
@@ -157,6 +177,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <span class="text-error"><small><?php echo $cpassErr ?></small></span><br/>
                         </div>
                         <div class="col-sm-12">
+                            <div class="g-recaptcha" data-sitekey="<?php echo $siteKey; ?>"></div>
+                            <br>
+                        </div>
+                        <div class="col-sm-12">
                             <button class="btn btn-success btn-block" type="submit">Register</button>
                             <br/>
                         </div>
@@ -168,7 +192,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
         <div class="clearfix"></div>
-        <div class="text-error text-center"><h3><?php echo $message ?></h3></div>
+        <div class="text-error text-center"><h3><?php echo $message ?><?php echo $errMsg ?></h3></div>
     </div>
 </div>
 
