@@ -17,7 +17,12 @@
 
 (7) User can add new subject and new questions
 
+<<<<<<< HEAD
 (8) Forget password recovery
+=======
+(8) Forgot Password Recovery
+
+>>>>>>> origin/master
 
 (9) Recaptcha during registration to protect website from spam and abuse
 
