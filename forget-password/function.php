@@ -47,7 +47,7 @@ function send_mail($to, $token)
     $mail->Host = 'mail.smtp2go.com';//smtp.gmail.com
     $mail->SMTPAuth = true;
     $mail->Username = 'riteshhota.2008@gmail.com';//Smtp Username
-    $mail->Password = 'abhisekh96';//Smtp Password
+    $mail->Password = 'pass';//Smtp Password
     $mail->SMTPSecure = 'tls';//ssl or tls
     $mail->Port = 2525;//465 or 587
 
